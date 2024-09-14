@@ -64,7 +64,7 @@ function Login() {
       >
         <div className="flex flex-col items-center mb-4">
           <img
-            src="logo_official.png"
+            src="lg.png"
             className="w-24 h-16 sm:w-32 sm:h-20"
             alt="Logo"
           />

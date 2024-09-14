@@ -57,7 +57,7 @@ function SignUp() {
     <div className="p-8 md:p-10 lg:p-20">
       <div className="flex flex-col items-center w-full max-w-lg mx-auto bg-gray-100 border border-gray-300 rounded-lg p-8">
         <div className="flex flex-col items-center mb-6">
-          <img src="logo_official.png" className="w-40 h-20 mb-4" alt="Logo" />
+          <img src="lg.png" className="w-36 h-20 mb-4" alt="Logo" />
           <div className="text-xl font-normal mt-[-0.5rem] ">
             Create Your Profile To FFR System
           </div>
