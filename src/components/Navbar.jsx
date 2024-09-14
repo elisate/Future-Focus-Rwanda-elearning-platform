@@ -82,11 +82,12 @@ function Navbar() {
           isMenuOpen ? "block" : "hidden"
         } absolute top-16 left-0 w-full bg-white`}
       >
-        <ul className="flex flex-col list-none gap-5 text-gray-900 p-4">
+        <ul className="flex flex-col list-none gap-5 text-gray-900 p-4 " onClick={toggleMenu}>
           <li>
             <Link
               to="/"
               className="text-gray-900 no-underline "
+              
             >
               HOME
             </Link>
