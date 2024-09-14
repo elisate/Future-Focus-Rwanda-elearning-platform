@@ -17,8 +17,8 @@ function Navbar() {
       {/* Main Container for Navbar with 5rem left and right padding */}
       <div className="flex items-center justify-between pl-5 pr-5 md:pl-10 md:pr-10 lg:pl-20 lg:pr-20 h-full w-full max-w-screen-xl mx-auto">
         {/* Logo */}
-        <div className="w-36 h-16 md:w-40 md:h-20 flex-shrink-0">
-          <img src={logo} alt="Logo" className="w-full h-full object-contain" />
+        <div className="w-36 h-16 md:w-36 md:h-20 flex-shrink-0">
+          <img src='lg.png' alt="Logo" className="w-full h-full" />
         </div>
 
         {/* Navigation Links (centered) */}
