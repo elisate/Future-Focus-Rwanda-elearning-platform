@@ -4,18 +4,16 @@ import NavPart from "./NavPart";
 import Sidebar from "./Sidebar";
 
 function DashboardLayout() {
-  // Assuming a token and user role are stored in localStorage upon successful login
-  const isAuthenticated = localStorage.getItem("userToken"); // Or any other logic for auth
-  const userRole = localStorage.getItem("role"); // Retrieve user role from storage
-
-  if (!isAuthenticated) {
-    // If the user is not authenticated, redirect to the login page
+  let userToken = localStorage.getItem("userToken");
+  if (!userToken) {
     return <Navigate to="/login" />;
   }
 
+  userToken = JSON.parse(userToken);
+  const userRole = userToken?.user?.role;
+
   if (userRole !== "isAdmin") {
-    // If the user does not have the 'isAdmin' role, redirect to the landing page
-    return <Navigate to="/landing" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (
