@@ -37,6 +37,8 @@ function Login() {
 
         if (role === "isAdmin") {
           navigate("/dashboard");
+        } else if (role === "isInstructor") {
+          navigate("/instructor"); // Navigate to the instructor route
         } else {
           navigate("/landing");
         }
@@ -63,11 +65,7 @@ function Login() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col items-center mb-4">
-          <img
-            src="lg.png"
-            className="w-24 h-16 sm:w-32 sm:h-20"
-            alt="Logo"
-          />
+          <img src="lg.png" className="w-24 h-16 sm:w-32 sm:h-20" alt="Logo" />
           <div className="text-lg sm:text-xl font-normal mt-[-0.5rem] mb-6">
             Welcome Back User!!!
           </div>

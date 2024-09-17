@@ -18,6 +18,9 @@ import Student from "./dashboards/pages/Student";
 import Users from "./dashboards/pages/Users";
 import Contacts from "./dashboards/pages/Contacts";
 import Courses from "./dashboards/pages/Courses";
+import instuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
+import DashboardI from "./dashboards/instructorDashboard/DashboardI";
+import InstuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
 
 
 function App() {
@@ -35,21 +38,23 @@ function App() {
               path="/studentregistration/:Pid"
               element={<StudentRegistration />}
             />
-            <Route path="/studentCourse" element={<UserDashboard/>} />
+            <Route path="/studentCourse" element={<UserDashboard />} />
             <Route path="/viewCourse/:courseId" element={<ViewCourse />} />
-            
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signIn" element={<SignUp />} />
-          <Route path="/" element={<Dashboardlayout/>}>
-          <Route index element={<Dashboard/>}/>
+          <Route path="/" element={<Dashboardlayout />}>
+            <Route index element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/programs" element={<Programsd />} />
             <Route path="/students" element={<Student />} />
             <Route path="/users" element={<Users />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/courses" element={<Courses/>}/>
-          
+            <Route path="/courses" element={<Courses />} />
+          </Route>
+          <Route path="/" element={<InstuctorLayout/>}>
+            <Route path="/" index element={<DashboardI />} />
+            <Route path="/instructor" element={<DashboardI />} />
           </Route>
         </Routes>
       </BrowserRouter>
