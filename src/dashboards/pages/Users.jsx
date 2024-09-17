@@ -8,6 +8,7 @@ import {
   FaEye,
 } from "react-icons/fa";
 import { mycontext } from "../../fetch/ContextProvider";
+import CreateUser from "./CreateUser";
 
 function Users() {
   const { users = [] } = mycontext();
@@ -126,10 +127,25 @@ function Users() {
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     usePagination
-  );
+    );
+  const [adduser, setAdduser] = useState(false);
+  const handleadd=() => {
+    setAdduser(!adduser)
+  }
 
   return (
     <div className="pt-20 ml-12 lg:ml-48">
+      {adduser && <CreateUser handleadd={handleadd} />}
+      <div className="pt-5 pl-3">
+        <button
+          type="button"
+          className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
+          onClick={handleadd}
+        >
+          Add Isntructor
+        </button>
+      </div>
+
       <div className="overflow-x-auto">
         <table
           {...getTableProps()}
