@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { useTable, usePagination } from "react-table";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaEye, FaReply, FaTrash } from "react-icons/fa";
+import { mycontext } from "../../fetch/ContextProvider";
+import { ImReply } from "react-icons/im";
 
 function Courses() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const { contact } = mycontext();
 
   const columns = useMemo(
     () => [
@@ -28,20 +31,35 @@ function Courses() {
         ),
       },
       {
-        Header: "Course Name",
-        accessor: "courseName",
+        Header: "Names",
+        accessor: "names",
       },
       {
-        Header: "Instructor",
-        accessor: "instructor",
+        Header: "Email",
+        accessor: "email",
       },
       {
-        Header: "Duration",
-        accessor: "duration",
+        Header: "subject",
+        accessor: "subject",
       },
       {
-        Header: "Price",
-        accessor: "price",
+        Header: "Actions",
+        Cell: ({ row }) => (
+          <div className="flex gap-4">
+            <FaEye
+              className="text-orange-500 cursor-pointer"
+              onClick={() => handleView(row.original)}
+            />
+            <ImReply
+              className="text-green-500 cursor-pointer"
+              onClick={() => handleEdit(row.original)}
+            />
+            <FaTrash
+              className="text-red-500 cursor-pointer"
+              onClick={() => handleDelete(row.original)}
+            />
+          </div>
+        ),
       },
     ],
     [selectedRows, selectAll]
