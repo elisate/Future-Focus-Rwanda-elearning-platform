@@ -9,12 +9,14 @@ import {
 } from "react-icons/fa";
 import { mycontext } from "../../fetch/ContextProvider";
 import CreateUser from "./CreateUser";
+import ViewUserModal from "./ViewUserModal"; // Import the modal component
 
 function Users() {
   const { users = [] } = mycontext();
 
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [viewUser, setViewUser] = useState(null); // Modal state
 
   const columns = useMemo(
     () => [
@@ -55,7 +57,12 @@ function Users() {
       },
       {
         Header: "User role",
-        accessor: "role",
+        Cell: ({ row }) => {
+          const { role, instructor_department } = row.original;
+          return role === "isInstructor" && instructor_department
+            ? `${role} (${instructor_department})`
+            : role;
+        },
       },
       {
         Header: "Actions",
@@ -81,8 +88,7 @@ function Users() {
   );
 
   const handleView = (user) => {
-    console.log("View", user);
-    // Implement view logic here
+    setViewUser(user); // Show modal with user details
   };
 
   const handleEdit = (user) => {
@@ -127,11 +133,12 @@ function Users() {
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     usePagination
-    );
+  );
+
   const [adduser, setAdduser] = useState(false);
-  const handleadd=() => {
-    setAdduser(!adduser)
-  }
+  const handleadd = () => {
+    setAdduser(!adduser);
+  };
 
   return (
     <div className="pt-20 ml-12 lg:ml-48">
@@ -142,7 +149,7 @@ function Users() {
           className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
           onClick={handleadd}
         >
-          Add Isntructor
+          Add Instructor
         </button>
       </div>
 
@@ -211,22 +218,28 @@ function Users() {
           </div>
           <div className="flex items-center space-x-2">
             <button
-              onClick={() => previousPage()}
+              className="bg-gray-200 p-2 rounded disabled:opacity-50"
+              onClick={previousPage}
               disabled={!canPreviousPage}
-              className="p-2 text-gray-600 disabled:text-gray-400"
             >
               <FaChevronLeft />
             </button>
+            <span className="text-sm">
+              {pageIndex + 1} of {pageOptions.length}
+            </span>
             <button
-              onClick={() => nextPage()}
+              className="bg-gray-200 p-2 rounded disabled:opacity-50"
+              onClick={nextPage}
               disabled={!canNextPage}
-              className="p-2 text-gray-600 disabled:text-gray-400"
             >
               <FaChevronRight />
             </button>
           </div>
         </div>
       </div>
+
+      {/* Modal for viewing user details */}
+      <ViewUserModal user={viewUser} onClose={() => setViewUser(null)} />
     </div>
   );
 }

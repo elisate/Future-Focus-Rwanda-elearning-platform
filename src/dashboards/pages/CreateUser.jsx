@@ -14,7 +14,15 @@ const CreateUser = ({ handleadd }) => {
   } = useForm();
 
   const onsubmit = async (data) => {
-    const { firstname, lastname, email, role, password, gender } = data;
+    const {
+      firstname,
+      lastname,
+      email,
+      role,
+      password,
+      gender,
+      instructor_department,
+    } = data;
     const formData = new FormData();
     setLoading(true); // Set loading state to true when request starts
     try {
@@ -24,6 +32,7 @@ const CreateUser = ({ handleadd }) => {
       formData.append("password", password);
       formData.append("role", role);
       formData.append("gender", gender);
+      formData.append("instructor_department", instructor_department);
 
       const res = await axios.post(
         "http://localhost:5000/user/register",
@@ -141,7 +150,35 @@ const CreateUser = ({ handleadd }) => {
                   <option value="female">Female</option>
                 </select>
               </div>
-
+              <div>
+                <label
+                  htmlFor="gender"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Instructor Department
+                </label>
+                <select
+                  name="gender"
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring focus:ring-opacity-50"
+                  {...register("instructor_department", { required: true })}
+                >
+                  <option value="">Select Department</option>
+                  <option value="Robotics">Robotics</option>
+                  <option value="Electronics & Embedded Systems">
+                    {" "}
+                    Electronics & Embedded Systems
+                  </option>
+                  <option value="Computer Programming">
+                    Computer Programming
+                  </option>
+                  <option value="3D Designing & 3D Printing">
+                    3D Designing & 3D Printing</option>
+                  <option value="Mathematics of Problems Solving">
+                    {" "}
+                    Mathematics of Problems Solving
+                  </option>
+                </select>
+              </div>
               <div>
                 <label
                   htmlFor="User Role"

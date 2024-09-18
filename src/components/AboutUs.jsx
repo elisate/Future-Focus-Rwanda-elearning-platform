@@ -60,24 +60,26 @@ function AboutUs() {
 
       {/* Main Content Section */}
       <div className="text-xl font-medium pt-8 pb-1 px-6 sm:px-10 lg:px-20">
-        <span className="border-l-2 border-orange-500 pl-2">Future Focus Rwanda</span>
+        <span className="border-l-2 border-orange-500 pl-2">
+          Future Focus Rwanda
+        </span>
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-start pt-3 gap-8 pb-8 px-6 sm:px-10 lg:px-20">
         <img
           src="about2.jpg"
-          className="w-90 h-75 md:w-[500px] md:h-[400px]"
+          className="w-90 h-60 md:w-[500px] md:h-[400px]"
           alt="About Us"
         />
 
         <div className="w-full md:w-[50%]">
-          <p className="mb-4">
+          <p className="mb-5">
             Welcome to Future Focus Rwanda. Our passion at Future Focus Rwanda
             is to democratize access to STEAM education in Rwanda. We provide
             world-class STEAM (Science, Technology, Engineering, Arts and
             Mathematics) education to students in the 4 – 16 years age-group.
           </p>
-          <p className="mb-4">
+          <p className="mb-5">
             Our focus at FUTURE FOCUS RWANDA are students (in and out of school)
             in Rwanda. We expose students to cutting-edge technologies such as
             Robotics, 3D Printing, Coding in different languages to ensure a
@@ -87,7 +89,11 @@ function AboutUs() {
           </p>
           <p>
             Join us in our mission to inspire the next generation of innovators
-            and leaders in Rwanda!
+            and leaders in Rwanda! At Future Focus Rwanda, we are dedicated to
+            shaping a brighter future through cutting-edge education and
+            visionary programs. Our commitment is to empower students with the
+            skills and knowledge needed to excel in a rapidly evolving world.
+           
           </p>
         </div>
       </div>
