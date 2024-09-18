@@ -21,6 +21,7 @@ import Courses from "./dashboards/pages/Courses";
 import instuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
 import DashboardI from "./dashboards/instructorDashboard/DashboardI";
 import InstuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
+import CourseI from "./dashboards/instructorDashboard/CourseI";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/" element={<InstuctorLayout/>}>
             <Route path="/" index element={<DashboardI />} />
             <Route path="/instructor" element={<DashboardI />} />
+            <Route path="/addCourses" element={<CourseI/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

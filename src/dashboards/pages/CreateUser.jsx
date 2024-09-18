@@ -44,8 +44,12 @@ const CreateUser = ({ handleadd }) => {
         }
       );
 
+      
+
+
       // Success notification
       Notify.success("User created successfully!");
+      
 
       // Reset form after successful submission
       reset();
@@ -152,13 +156,13 @@ const CreateUser = ({ handleadd }) => {
               </div>
               <div>
                 <label
-                  htmlFor="gender"
+                  htmlFor="Instructor Department"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Instructor Department
                 </label>
                 <select
-                  name="gender"
+                  name="instructor_department"
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring focus:ring-opacity-50"
                   {...register("instructor_department", { required: true })}
                 >
@@ -172,7 +176,8 @@ const CreateUser = ({ handleadd }) => {
                     Computer Programming
                   </option>
                   <option value="3D Designing & 3D Printing">
-                    3D Designing & 3D Printing</option>
+                    3D Designing & 3D Printing
+                  </option>
                   <option value="Mathematics of Problems Solving">
                     {" "}
                     Mathematics of Problems Solving

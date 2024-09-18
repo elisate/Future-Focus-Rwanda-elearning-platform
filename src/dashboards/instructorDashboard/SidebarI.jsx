@@ -61,14 +61,13 @@ function SidebarI() {
             <MdDashboard className="text-orange-600 text-xl" />
             <Link to="/dashboard">Dashboard</Link>
           </div>
-          
+
           <div className="text-xs pl-2">LIST</div>
           <div className="flex items-center gap-2 pl-4">
             <PiStudent className="text-orange-600 text-xl" />
             <Link to="/students">Student</Link>
           </div>
-          
-          
+
           <div className="text-xs pl-2">SERVICES</div>
           <div className="flex items-center gap-2 pl-4">
             <SiBookstack className="text-orange-600 text-xl" />
@@ -76,7 +75,7 @@ function SidebarI() {
           </div>
           <div className="flex items-center gap-2 pl-4">
             <PiNotePencil className="text-orange-600 text-xl" />
-            <Link to="/courses">Courses</Link>
+            <Link to="/addCourses">Courses</Link>
           </div>
           <div className="text-xs pl-2">AUTHENTICATION</div>
           <div
