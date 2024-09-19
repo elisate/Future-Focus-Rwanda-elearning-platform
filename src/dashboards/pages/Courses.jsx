@@ -36,7 +36,7 @@ function Courses() {
       },
       {
         Header: "Id",
-        accessor: "_id",
+        accessor: (row, i) => i + 1,
       },
       {
         Header: "Course Title",

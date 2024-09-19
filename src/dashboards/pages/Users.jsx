@@ -39,6 +39,7 @@ function Users() {
           />
         ),
       },
+    
       {
         Header: "Firstname",
         accessor: "firstname",
@@ -143,7 +144,7 @@ function Users() {
   return (
     <div className="pt-20 ml-12 lg:ml-48">
       {adduser && <CreateUser handleadd={handleadd} />}
-      <div className="pt-5 pl-3">
+      <div className="pt-5 pl-3 flex flex-row items-center justify-between pr-2">
         <button
           type="button"
           className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
@@ -151,6 +152,7 @@ function Users() {
         >
           Add Instructor
         </button>
+        <div>{ users.length} Registered Users</div>
       </div>
 
       <div className="overflow-x-auto">

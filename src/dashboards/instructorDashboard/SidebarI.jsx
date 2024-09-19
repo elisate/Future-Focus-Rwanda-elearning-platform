@@ -6,8 +6,9 @@ import { SiBookstack } from "react-icons/si";
 import { PiNotePencil } from "react-icons/pi";
 import { MdOutlinePayments } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { GrContactInfo } from "react-icons/gr";
+import { MdOutlineGrade } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { GrContact } from "react-icons/gr";
 
 function SidebarI() {
   const [isOpen, setIsOpen] = useState(false); // State to control sidebar toggle
@@ -59,23 +60,31 @@ function SidebarI() {
           <div className="text-xs pl-2">MAIN</div>
           <div className="flex items-center gap-2 pl-4">
             <MdDashboard className="text-orange-600 text-xl" />
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboardi">Dashboard</Link>
           </div>
 
           <div className="text-xs pl-2">LIST</div>
           <div className="flex items-center gap-2 pl-4">
             <PiStudent className="text-orange-600 text-xl" />
-            <Link to="/students">Student</Link>
+            <Link to="/dashboardi">Student</Link>
+          </div>
+          <div className="flex items-center gap-2 pl-4">
+            <GrContact className="text-orange-600 text-xl" />
+            <Link to="/dashboardi">All contact</Link>
           </div>
 
           <div className="text-xs pl-2">SERVICES</div>
           <div className="flex items-center gap-2 pl-4">
             <SiBookstack className="text-orange-600 text-xl" />
-            <Link to="/programs">Programs</Link>
+            <Link to="/dashboardi">Programs</Link>
           </div>
           <div className="flex items-center gap-2 pl-4">
             <PiNotePencil className="text-orange-600 text-xl" />
             <Link to="/addCourses">Courses</Link>
+          </div>
+          <div className="flex items-center gap-2 pl-4">
+            <MdOutlineGrade className="text-orange-600 text-xl" />
+            <Link to="/dashboardi">Grading</Link>
           </div>
           <div className="text-xs pl-2">AUTHENTICATION</div>
           <div

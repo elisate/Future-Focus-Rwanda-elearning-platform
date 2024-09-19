@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { mycontext } from "../../fetch/ContextProvider";
 import CreateCourse from "./CreateCourse";
+import { Link } from "react-router-dom";
 
 function CourseI() {
   const { course } = mycontext();
@@ -122,15 +123,15 @@ function CourseI() {
 
   return (
       <div className="pt-20 ml-48">
-          {coursemodal && <CreateCourse handleCourseModal={handleCourseModal}/>}
+          {/* {coursemodal && <CreateCourse handleCourseModal={handleCourseModal}/>} */}
       <div className="pt-5 pl-3">
-        <button
+      <Link to='/createCourse'> <button
           type="button"
                   className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
-                  onClick={handleCourseModal}
+                 
         >
           Add Course
-        </button>
+        </button></Link> 
       </div>
       <div className="m-5 font-sans">
         <table

@@ -38,7 +38,7 @@ function Programsd() {
       },
       {
         Header: "ID",
-        accessor: "_id",
+        accessor: (row, i) => i + 1,
       },
       {
         Header: "Program Name",

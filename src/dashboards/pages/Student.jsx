@@ -10,9 +10,12 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 import { mycontext } from "../../fetch/ContextProvider";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { IoMdPrint, IoMdCloudDownload } from "react-icons/io";
 
 function Student() {
-  const { student = [] } = mycontext(); // Default to empty array if undefined
+  const { student = [] } = mycontext();
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [expandedRows, setExpandedRows] = useState(new Set());
@@ -38,26 +41,11 @@ function Student() {
           />
         ),
       },
-      {
-        Header: "Reg num",
-        accessor: "regNumber",
-      },
-      {
-        Header: "Firstname",
-        accessor: "student_firstname",
-      },
-      {
-        Header: "Lastname",
-        accessor: "student_lastname",
-      },
-      {
-        Header: "Email",
-        accessor: "student_email",
-      },
-      {
-        Header: "Gender",
-        accessor: "student_gender",
-      },
+      { Header: "Reg num", accessor: "regNumber" },
+      { Header: "Firstname", accessor: "student_firstname" },
+      { Header: "Lastname", accessor: "student_lastname" },
+      { Header: "Email", accessor: "student_email" },
+      { Header: "Gender", accessor: "student_gender" },
       {
         Header: "Programs",
         accessor: (row) => {
@@ -65,8 +53,7 @@ function Student() {
           const programTitles = row.program_enrolled_in
             .map((program) => program.program_title)
             .join(", ");
-
-          const maxLength = 20; // Set a maximum length for the string
+          const maxLength = 20;
 
           return (
             <div>
@@ -122,9 +109,54 @@ function Student() {
     });
   };
 
+  const handlePrint = () => {
+    const printWindow = window.open("", "", "height=600,width=800");
+    printWindow.document.write("<html><head><title>Student List</title>");
+    printWindow.document.write(
+      '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">'
+    );
+    printWindow.document.write("</head><body>");
+    printWindow.document.write("<h1>Student List</h1>");
+    const tableClone = document.querySelector("table").cloneNode(true);
+    printWindow.document.write(tableClone.outerHTML);
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
+  };
+
+  const handleDownload = () => {
+    const doc = new jsPDF();
+    doc.text("Student List", 14, 16);
+    const tableColumn = [
+      "Reg num",
+      "Firstname",
+      "Lastname",
+      "Email",
+      "Gender",
+      "Programs",
+    ];
+    const tableRows = [];
+
+    student.forEach((student) => {
+      const studentData = [
+        student.regNumber,
+        student.student_firstname,
+        student.student_lastname,
+        student.student_email,
+        student.student_gender,
+        student.program_enrolled_in
+          .map((program) => program.program_title)
+          .join(", "),
+      ];
+      tableRows.push(studentData);
+    });
+
+    doc.autoTable(tableColumn, tableRows, { startY: 20 });
+    doc.save("student_list.pdf");
+  };
+
   const handleView = (student) => {
     console.log("View", student);
-    // Implement view logic here
   };
 
   const handleEdit = (student) => {
@@ -172,7 +204,27 @@ function Student() {
   );
 
   return (
-    <div className="pt-20 ml-48 ">
+    <div className="pt-20 ml-48">
+      <div className=" pb-6 pt-5 pl-3 flex flex-row items-center justify-between pr-2">
+        <div className="flex flex-row gap-7 cursor-pointer">
+          <div className="flex flex-row items-center gap-1 text-green-500">
+            <IoMdPrint
+              className="  text-sm md:text-base cursor-pointer transition-colors duration-300 "
+              onClick={handlePrint}
+            />
+            <span onClick={handlePrint}>Print Lists</span>
+          </div>
+          <div className="flex flex-row items-center gap-1 text-green-500">
+            <IoMdCloudDownload
+              className="text-sm md:text-base cursor-pointer transition-colors duration-300 "
+              onClick={handleDownload}
+            />
+            <span onClick={handleDownload}>Download as PDF</span>
+          </div>
+        </div>
+        <div>{student.length} Registered Users</div>
+      </div>
+
       <div className="overflow-x-auto">
         <table
           {...getTableProps()}
