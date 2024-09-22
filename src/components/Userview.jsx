@@ -43,11 +43,16 @@ function UserDashboard() {
   }, {});
 
   return (
-    <div className="px-6  lg:px-14 sm:px-6 pt-6 sm:pt-10 md:pt-12 lg:pt-32 pb-8 flex flex-col gap-6 sm:gap-8 lg:gap-12  lg:pl-20 lg:pr-20 ">
-     <div className="font-extralight text-2xl"><span>Welcome Back Dear Learner !!!</span></div>
+    <div className="px-6 lg:px-14 sm:px-6 pt-2 pb-8 flex flex-col gap-6 sm:gap-8 lg:gap-12 lg:pl-20 lg:pr-20">
+      <div className="font-extralight text-2xl mb-0">
+    
+        {/* Set mb-0 to remove bottom margin */}
+        <span>Welcome Back Dear Learner !!!</span>
+      </div>
+
       {Object.keys(groupedCourses).map((programTitle) => (
         <div key={programTitle}>
-          <div className="text-lg sm:text-xl lg:text-2xl font-medium pb-4 sm:pb-6 pt-16 sm:pt-16 lg:pb-10 text-center sm:text-left">
+          <div className="text-lg sm:text-xl lg:text-2xl font-medium pb-4 sm:pb-6 text-center sm:text-left">
             {programTitle} <span className="text-[#ea7b30]">Courses</span>
           </div>
 

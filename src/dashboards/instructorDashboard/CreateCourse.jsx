@@ -24,73 +24,75 @@ function CreateCourse() {
     formState: { errors },
   } = useForm();
 
-  const onsubmit = async (data) => {
-    setLoading(true); // Start loading
-    setValidationError(""); // Reset validation error
-     const passhint = JSON.parse(localStorage.getItem("userToken"));
-    const key = passhint?.user?.tokens?.accessToken;
-    console.log('toggge',key)
+ const onsubmit = async (data) => {
+   setLoading(true);
+   setValidationError("");
 
-    const {
-      courseTitle,
-      videos,
-      documents,
-      images,
-      courseContent,
-      program_title,
-    } = data;
+   const passhint = JSON.parse(localStorage.getItem("userToken"));
+   const key = passhint?.user?.tokens?.accessToken;
 
-    // Check if the program_title matches the user's department (dept)
-    if (program_title !== dept) {
-      setValidationError(
-        `The selected program title must match your department: ${dept}`
-      );
-      setLoading(false); // Stop loading
-      return;
-    }
+   const {
+     courseTitle,
+     videos,
+     documents,
+     images,
+     courseContent,
+     program_title,
+   } = data;
 
-    const formData = new FormData();
+   if (program_title !== dept) {
+     setValidationError(
+       `The selected program title must match your department: ${dept}`
+     );
+     setLoading(false);
+     return;
+   }
 
-    try {
-      formData.append("videos", videos[0]);
-      formData.append("documents", documents[0]);
-      formData.append("images", images[0]);
-      formData.append("courseContent", courseContent);
-      formData.append("program_title", program_title);
-      formData.append("courseTitle", courseTitle);
+   const formData = new FormData();
+   formData.append("videos", videos[0]);
+   formData.append("documents", documents[0]);
+   formData.append("images", images[0]);
+   formData.append("courseContent", courseContent);
+   formData.append("program_title", program_title);
+   formData.append("courseTitle", courseTitle);
 
-      const res = await axios.post(
-        `http://localhost:5000/course/createCourse`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${key}`,
-          },
-        }
-      );
+   try {
+     const res = await axios.post(
+       `https://future-focus-rwanada.onrender.com/course/createCourse`,
+       formData,
+       {
+         headers: {
+           "Content-Type": "multipart/form-data",
+           Authorization: `Bearer ${key}`,
+         },
+       }
+     );
 
-      if (res.status === 200) {
-        Notify.success("Course created successfully!");
-        reset(); // Reset the form fields
-      } else {
-        Notify.failure("Failed to create course. Please try again.");
-      }
-    } catch (error) {
-      console.log(error);
-      Notify.failure("An error occurred. Please try again.");
-    } finally {
-      setLoading(false); // Stop loading
-    }
-  };
+     // Check if the response contains a success message
+     if (res.data && res.data.message === "Success") {
+       Notify.success("Course created successfully!");
+       reset(); // Reset the form fields
+     } else {
+       Notify.failure("Failed to create course. Please try again.");
+     }
+   } catch (error) {
+     console.log(error);
+     Notify.failure("An error occurred. Please try again.");
+   } finally {
+     setLoading(false);
+   }
+ };
+
 
 
   return (
     <div className=" ml-52 pt-24 pb-12">
-      <div className="pl-8 pb-2 text-2xl">Welcome Dear Instructor {username} </div>
+      <div className="pl-8 pb-2 text-2xl">
+        Welcome Dear Instructor {username}{" "}
+      </div>
 
       <div className="flex flex-row items-center gap-2 pl-7">
-        <MdOutlineNotificationsNone  className="text-orange-500"/>
+        <MdOutlineNotificationsNone className="text-orange-500" />
         <div>
           Your department is {dept}. Please select it carefully when filling out
           the form. If it's not listed, contact the administrator.
@@ -229,7 +231,7 @@ function CreateCourse() {
             <button
               type="submit"
               className={`bg-[#ea7b30] text-white py-2 px-4 rounded-lg text-base ${
-                loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#d96d1e]"
+                loading ? "cursor-pointer" : "hover:bg-[#4f1930]"
               }`}
               disabled={loading} // Disable button while loading
             >

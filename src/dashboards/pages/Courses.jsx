@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useTable, usePagination } from "react-table";
+import { Notify } from "notiflix";
+import Notiflix from "notiflix";
 import {
   FaEdit,
   FaTrash,
@@ -56,7 +58,7 @@ function Courses() {
             />
             <FaTrash
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(row.original)}
+              onClick={() => handleDelete(row.original._id)}
             />
           </div>
         ),
@@ -74,9 +76,9 @@ function Courses() {
     console.log("Edit", course);
   };
 
-  const handleDelete = (course) => {
-    console.log("Delete", course);
-  };
+  // const handleDelete = (course) => {
+  //   console.log("Delete", course);
+  // };
 
   const handleSelect = (id) => {
     setSelectedRows((prevSelectedRows) =>
@@ -114,6 +116,40 @@ function Courses() {
     usePagination
   );
 
+  const handleDelete = async (id) => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
+    const token = userToken?.user?.tokens?.accessToken;
+    try {
+      Notiflix.Confirm.show(
+        "Confirm Delete Program",
+        "Do you want to delete this program?",
+        "Yes",
+        "No",
+        async () => {
+          await axios.delete(
+            `http://localhost:5000/course/deleteCourse/${id}`,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          // Update the program list after deletion
+          setProgram((prevPrograms) =>
+            prevPrograms.filter((program) => program._id !== id)
+          );
+          Notiflix.Notify.success("Program deleted successfully");
+        },
+        () => {
+          Notiflix.Notify.info("Delete action canceled");
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      Notiflix.Notify.failure("Failed to delete program");
+    }
+  };
   return (
     <div className="pt-20 ml-48">
       <div className="m-5 font-sans">

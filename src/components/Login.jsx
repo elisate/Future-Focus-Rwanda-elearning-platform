@@ -19,7 +19,7 @@ function Login() {
     setIsLoading(true); // Start loading
     try {
       const res = await axios.post(
-        "http://localhost:5000/user/login",
+        "https://future-focus-rwanada.onrender.com/user/login",
         { email, password },
         {
           headers: {

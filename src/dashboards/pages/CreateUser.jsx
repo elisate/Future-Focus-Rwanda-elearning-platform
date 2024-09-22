@@ -35,7 +35,7 @@ const CreateUser = ({ handleadd }) => {
       formData.append("instructor_department", instructor_department);
 
       const res = await axios.post(
-        "http://localhost:5000/user/register",
+        "https://future-focus-rwanada.onrender.com/user/register",
         formData,
         {
           headers: {

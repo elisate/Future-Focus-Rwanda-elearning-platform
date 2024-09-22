@@ -155,7 +155,7 @@ function Programsd() {
         >
           Add Program
         </button>
-        <div className="mt-2 md:mt-0">{program.length} programs</div>
+        <div className="mt-2 md:mt-0 font-extralight">{program.length} programs</div>
       </div>
       <div className="m-2 md:m-5 font-sans">
         <table

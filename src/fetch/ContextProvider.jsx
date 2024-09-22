@@ -10,7 +10,7 @@ export const Appcontext = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [contact, setContact] = useState([]);
   const [course, setCourse] = useState([]);
-
+  const [inscourse, setInscourse] = useState([]);
   useEffect(() => {
     const getprogram = async () => {
       try {
@@ -102,6 +102,8 @@ export const Appcontext = ({ children }) => {
      };
      getcourse();
    }, []);
+  
+ 
   return (
     <statement.Provider value={{
       program, setProgram, student, setStudent,
