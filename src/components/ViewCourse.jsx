@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import { IoCloudDownloadOutline } from "react-icons/io5";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function ViewCourse() {
@@ -194,9 +195,18 @@ function ViewCourse() {
               <video controls className="w-full rounded-lg shadow-md mb-8">
                 <source src={singlecourse.videos} type="video/mp4" />
               </video>
+
+              <a
+                href={singlecourse.videos}
+                download
+                className=" mt-4 text-green-500 hover:underline flex flex-row items-center gap-1 "
+              >
+              <IoCloudDownloadOutline/>  Download Video
+              </a>
             </div>
           )}
         </div>
+
         <div ref={documentsRef}>
           {activeSection === "documents" && (
             <div className="flex flex-col">

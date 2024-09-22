@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { IoNotificationsOutline } from "react-icons/io5";
 
 function UserDashboard() {
+
+  let userToken = JSON.parse(localStorage.getItem("userToken"));
+  let token = userToken?.access_token;
+  let username = userToken?.user?.lastname;
+  let usernames = userToken?.user?.firstname;
+  let email = userToken?.user?.email;
+  let role = userToken?.user?.role;
+  let dept = userToken?.user?.instructor_department;
   const { Pid } = useParams();
   const navigate = useNavigate();
   const navigateSingleCourse = (courseId) => {
@@ -44,14 +53,14 @@ function UserDashboard() {
 
   return (
     <div className="px-6 lg:px-14 sm:px-6 pt-2 pb-8 flex flex-col gap-6 sm:gap-8 lg:gap-12 lg:pl-20 lg:pr-20">
-      <div className="font-extralight text-2xl mb-0">
-    
-        {/* Set mb-0 to remove bottom margin */}
-        <span>Welcome Back Dear Learner !!!</span>
+      <div className="font-extralight text-2xl mt-20">
+        <div className="flex flex-row items-center gap-1 ">
+          <IoNotificationsOutline className="text-orange-500" />
+          Hey dear <span>{username},</span> Welcome to your Course dashboard !! {" "}
+        </div>
       </div>
-
       {Object.keys(groupedCourses).map((programTitle) => (
-        <div key={programTitle}>
+        <div key={programTitle} className="mt-0 mb-0">
           <div className="text-lg sm:text-xl lg:text-2xl font-medium pb-4 sm:pb-6 text-center sm:text-left">
             {programTitle} <span className="text-[#ea7b30]">Courses</span>
           </div>
