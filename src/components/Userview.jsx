@@ -53,12 +53,16 @@ function UserDashboard() {
 
   return (
     <div className="px-6 lg:px-14 sm:px-6 pt-2 pb-8 flex flex-col gap-6 sm:gap-8 lg:gap-12 lg:pl-20 lg:pr-20">
-      <div className="font-extralight text-2xl mt-20">
-        <div className="flex flex-row items-center gap-1 ">
-          <IoNotificationsOutline className="text-orange-500" />
-          Hey dear <span>{username},</span> Welcome to your Course dashboard !! {" "}
+      <div className="font-extralight text-lg sm:text-xl md:text-2xl mt-10 sm:mt-16 md:mt-20">
+        <div className="flex flex-col sm:flex-row items-center gap-1">
+          <IoNotificationsOutline className="text-orange-500 text-2xl sm:text-2xl  " />
+          <span>
+            Hey dear <span>{username},</span> Welcome to your Course dashboard
+            !!
+          </span>
         </div>
       </div>
+
       {Object.keys(groupedCourses).map((programTitle) => (
         <div key={programTitle} className="mt-0 mb-0">
           <div className="text-lg sm:text-xl lg:text-2xl font-medium pb-4 sm:pb-6 text-center sm:text-left">

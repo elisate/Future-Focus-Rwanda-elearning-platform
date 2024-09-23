@@ -116,11 +116,13 @@ function Navbar() {
               TRAINING
             </Link>
           </li>
-          <li>
-            <Status_loged/>
-          </li>
+          
         </ul>
+        <div className="pl-3 pb-3">
+            <Status_loged/>
+          </div>
       </div>
+
     </div>
   );
 }
