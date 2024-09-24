@@ -51,7 +51,7 @@ function ViewContact() {
       const token = userToken?.user?.tokens?.accessToken;
       try {
         const res = await axios.get(
-          `http://localhost:5000/contact/getContactById/${Pid}`,
+          `https://future-focus-rwanada.onrender.com/contact/getContactById/${Pid}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setContact(res.data);

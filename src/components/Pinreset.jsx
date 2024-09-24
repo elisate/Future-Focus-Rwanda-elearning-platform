@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
-const ResetPassword = () => {
+const Pinreset = () => {
   const { token } = useParams(); // Get the reset token from URL params
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,7 +21,7 @@ const ResetPassword = () => {
     try {
       // Send POST request to backend API
       const res = await axios.post(
-        `https://future-focus-rwanada.onrender.com/api/reset/${token}`,
+        `https://future-focus-rwanada.onrender.com/password/reset/${token}`,
         { newPassword }
       );
 
@@ -69,4 +69,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default Pinreset;

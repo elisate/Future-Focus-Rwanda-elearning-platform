@@ -178,7 +178,7 @@ function Contact() {
         "No",
         async () => {
           await axios.delete(
-            `http://localhost:5000/contact/deleteContact/${id}`,
+            `https://future-focus-rwanada.onrender.com/contact/deleteContact/${id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

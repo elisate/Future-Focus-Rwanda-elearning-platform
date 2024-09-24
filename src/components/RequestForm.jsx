@@ -18,7 +18,7 @@ function RequestForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/password/requestReset",
+        "https://future-focus-rwanada.onrender.com/password/requestReset",
         { email },
         {
           headers: {

@@ -25,7 +25,7 @@ import InstuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
 import CourseI from "./dashboards/instructorDashboard/CourseI";
 import CreateCourse from "./dashboards/instructorDashboard/CreateCourse";
 import ViewContact from "./dashboards/pages/ViewContact";
-import ResetPassword from "./components/resetPassword";
+import ResetPassword from "./components/Pinreset";
 import RequestForm from "./components/RequestForm";
 
 

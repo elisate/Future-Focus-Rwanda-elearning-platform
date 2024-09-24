@@ -25,7 +25,7 @@ function ReplyContact({ contactId, handlereplymodal }) {
     setLoading(true); // Set loading to true
     try {
       const res = await axios.post(
-        `http://localhost:5000/contact/reply`,
+        `https://future-focus-rwanada.onrender.com/contact/reply`,
         formData,
         {
           headers: {

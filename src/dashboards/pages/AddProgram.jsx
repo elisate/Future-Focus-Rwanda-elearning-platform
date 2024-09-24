@@ -27,7 +27,7 @@ function AddProgram({ handleProgram }) {
       formData.append("programContent", programContent);
 
       const res = await axios.post(
-        "http://localhost:5000/program/createProgram",
+        "https://future-focus-rwanada.onrender.com/program/createProgram",
         formData,
         {
           headers: {

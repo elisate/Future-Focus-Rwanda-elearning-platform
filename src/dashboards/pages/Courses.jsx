@@ -127,7 +127,7 @@ function Courses() {
         "No",
         async () => {
           await axios.delete(
-            `http://localhost:5000/course/deleteCourse/${id}`,
+            `https://future-focus-rwanada.onrender.com/course/deleteCourse/${id}`,
             {
               headers: {
                 "Content-Type": "multipart/form-data",
