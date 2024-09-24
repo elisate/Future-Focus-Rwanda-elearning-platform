@@ -123,7 +123,7 @@ function Login() {
 
         <div className="my-4">
           <Link
-            to="/forgot-password"
+            to="/request"
             className="text-black hover:underline text-sm sm:text-base"
           >
             Forgot Password?
