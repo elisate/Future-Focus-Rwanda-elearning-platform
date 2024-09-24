@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Notify } from "notiflix";
-import { Loading } from "notiflix/build/notiflix-loading-aio";
+
 
 function AddProgram({ handleProgram }) {
   const {

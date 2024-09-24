@@ -11,9 +11,12 @@ import {
   FaEye,
 } from "react-icons/fa";
 import { mycontext } from "../../fetch/ContextProvider";
+import { IoMdCloudDownload, IoMdPrint } from "react-icons/io";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function Courses() {
-  const { course,setCourse } = mycontext();
+  const { course, setCourse } = mycontext();
 
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -77,10 +80,6 @@ function Courses() {
     console.log("Edit", course);
   };
 
-  // const handleDelete = (course) => {
-  //   console.log("Delete", course);
-  // };
-
   const handleSelect = (id) => {
     setSelectedRows((prevSelectedRows) =>
       prevSelectedRows.includes(id)
@@ -117,40 +116,81 @@ function Courses() {
     usePagination
   );
 
- const handleDelete = async (id) => {
-   const userToken = JSON.parse(localStorage.getItem("userToken"));
-   const token = userToken?.user?.tokens?.accessToken;
-   try {
-     Notiflix.Confirm.show(
-       "Confirm Delete Program",
-       "Do you want to delete this program?",
-       "Yes",
-       "No",
-       async () => {
-         await axios.delete(`http://localhost:5000/course/deleteCourse/${id}`, {
-           headers: {
-             "Content-Type": "multipart/form-data",
-             Authorization: `Bearer ${token}`,
-           },
-         });
-         // Update the course list after deletion
-         setCourse((prevCourse) =>
-           prevCourse.filter((course) => course._id !== id)
-         );
-         Notiflix.Notify.success("Course deleted successfully");
-       },
-       () => {
-         Notiflix.Notify.info("Delete action canceled");
-       }
-     );
-   } catch (error) {
-     console.log(error);
-     Notiflix.Notify.failure("Failed to delete course");
-   }
- };
+  const handleDelete = async (id) => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
+    const token = userToken?.user?.tokens?.accessToken;
+    try {
+      Notiflix.Confirm.show(
+        "Confirm Delete Program",
+        "Do you want to delete this program?",
+        "Yes",
+        "No",
+        async () => {
+          await axios.delete(
+            `http://localhost:5000/course/deleteCourse/${id}`,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          // Update the course list after deletion
+          setCourse((prevCourse) =>
+            prevCourse.filter((course) => course._id !== id)
+          );
+          Notiflix.Notify.success("Course deleted successfully");
+        },
+        () => {
+          Notiflix.Notify.info("Delete action canceled");
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      Notiflix.Notify.failure("Failed to delete course");
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Course List", 20, 10);
+    doc.autoTable({
+      head: [["ID", "Course Title"]],
+      body: course.map((course, index) => [index + 1, course.courseTitle]),
+    });
+    doc.save("courses.pdf");
+  };
 
   return (
     <div className="pt-20 ml-48">
+      <div className="ml-0 pr-11 md:pl-8 pt-4 md:pt-8 flex flex-col md:flex-row items-start md:items-center justify-between w-full md:w-11/12 text-sm md:text-lg">
+        <div className="flex flex-row gap-4 items-center">
+          <div
+            className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+            onClick={handlePrint}
+          >
+            <IoMdPrint className="text-sm md:text-base cursor-pointer transition-colors duration-300" />
+            <span>Print Lists</span>
+          </div>
+          <div>
+            <div
+              className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+              onClick={handleDownloadPDF}
+            >
+              <IoMdCloudDownload className="text-sm md:text-base cursor-pointer transition-colors duration-300" />
+              <span>Download as PDF</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-2 md:mt-0 font-extralight">
+          {course.length} Courses
+        </div>
+      </div>
       <div className="m-5 font-sans">
         <table
           {...getTableProps()}
@@ -208,7 +248,7 @@ function Courses() {
             selected
           </span>
           <span className="text-sm text-gray-600">
-            {pageIndex * pageSize + 1}-
+            {pageIndex * pageSize + 1}-{" "}
             {Math.min((pageIndex + 1) * pageSize, course.length)} of{" "}
             {course.length}
           </span>

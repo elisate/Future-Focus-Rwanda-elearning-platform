@@ -23,6 +23,7 @@ import DashboardI from "./dashboards/instructorDashboard/DashboardI";
 import InstuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
 import CourseI from "./dashboards/instructorDashboard/CourseI";
 import CreateCourse from "./dashboards/instructorDashboard/CreateCourse";
+import ViewContact from "./dashboards/pages/ViewContact";
 
 
 function App() {
@@ -53,12 +54,13 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/view-contact/:Pid" element={<ViewContact />} />
           </Route>
-          <Route path="/" element={<InstuctorLayout/>}>
+          <Route path="/" element={<InstuctorLayout />}>
             <Route path="/dashboardi" index element={<DashboardI />} />
             <Route path="/instructor" element={<DashboardI />} />
             <Route path="/addCourses" element={<CourseI />} />
-            <Route path="createCourse" element={<CreateCourse/>}/>
+            <Route path="createCourse" element={<CreateCourse />} />
           </Route>
         </Routes>
       </BrowserRouter>

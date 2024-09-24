@@ -73,7 +73,7 @@ function ViewProgram({ program, onClose }) {
         <div className="flex flex-col sm:flex-row gap-2 mt-4">
           <button
             type="button"
-            className="w-full sm:w-auto bg-[#4f1930] text-white rounded-lg py-1 px-3 text-xs md:text-sm cursor-pointer transition-colors duration-300 hover:bg-[#763350]"
+            className="w-full sm:w-auto  bg-red-500 hover:bg-red-400 text-white rounded-lg py-1 px-3 text-xs md:text-sm cursor-pointer transition-colors duration-300 "
           >
             Delete
           </button>

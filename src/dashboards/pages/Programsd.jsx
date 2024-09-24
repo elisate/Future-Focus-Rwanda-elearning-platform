@@ -12,6 +12,12 @@ import AddProgram from "./AddProgram";
 import ViewProgram from "./ViewProgram"; // Corrected casing
 import Notiflix from "notiflix";
 import axios from "axios";
+import { MdAddBox } from "react-icons/md";
+import { IoMdCloudDownload, IoMdPrint } from "react-icons/io";
+
+// Import jsPDF and AutoTable for PDF generation
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function Programsd() {
   const { program, setProgram } = mycontext();
@@ -107,7 +113,6 @@ function Programsd() {
             `https://future-focus-rwanada.onrender.com/program/deleteProgram/${id}`,
             {
               headers: {
-                // "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${token}`,
               },
             }
@@ -131,6 +136,25 @@ function Programsd() {
   const handleView = (program) => {
     setSelectedProgram(program); // Store the selected program for viewing
     setViewProgram(true); // Open the View modal
+  };
+
+  // Function to handle printing the list
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Function to handle downloading the list as PDF
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+
+    // AutoTable plugin for generating the table in PDF
+    doc.autoTable({
+      head: [["ID", "Program Name"]],
+      body: program.map((row, index) => [index + 1, row.program_title]),
+    });
+
+    // Save the generated PDF
+    doc.save("programs-list.pdf");
   };
 
   const {
@@ -167,14 +191,36 @@ function Programsd() {
         />
       )}
 
-      <div className="pl-4 md:pl-8 pt-4 md:pt-8 flex flex-col md:flex-row items-start md:items-center justify-between w-full md:w-11/12 text-sm md:text-lg">
-        <button
-          type="button"
-          className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
-          onClick={handleProgram}
-        >
-          Add Program
-        </button>
+      <div className="ml-10  pr-11 md:pl-8 pt-4 md:pt-8 flex flex-col md:flex-row items-start md:items-center justify-between w-full md:w-11/12 text-sm md:text-lg ">
+        <div className="flex flex-row gap-4 items-center">
+          <div
+            className="flex flex-row gap-1 items-center text-green-500 cursor-pointer hover:underline "
+            onClick={handleProgram}
+          >
+            <MdAddBox
+              className=" text-2xl md:text-base cursor-pointer transition-colors  "
+              onClick={handleProgram}
+            />
+            <span>Add Programs</span>
+          </div>
+
+          <div
+            className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+            onClick={handlePrint}
+          >
+            <IoMdPrint className="  text-sm md:text-base cursor-pointer transition-colors duration-300 " />
+            <span>Print Lists</span>
+          </div>
+
+          <div
+            className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+            onClick={handleDownloadPDF}
+          >
+            <IoMdCloudDownload className="text-sm md:text-base cursor-pointer transition-colors duration-300 " />
+            <span>Download as PDF</span>
+          </div>
+        </div>
+
         <div className="mt-2 md:mt-0 font-extralight">
           {program.length} programs
         </div>
@@ -221,54 +267,50 @@ function Programsd() {
           </tbody>
         </table>
 
-        <div className="flex flex-col md:flex-row justify-between md:justify-end pr-4 md:pr-12 pt-4 items-center gap-4 md:gap-8 mt-2">
-          <span className="text-sm flex items-center">
-            Rows per page:{" "}
-            <select
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-              className="ml-2 px-2 py-1 border border-gray-300 rounded"
-            >
-              {[5, 10, 15, 20].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  {pageSize}
-                </option>
-              ))}
-            </select>
+        <div className="flex flex-col md:flex-row justify-between md:justify-end pr-4 md:pr-12 pt-4 items-center gap-4 md:gap-2">
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
           </span>
-          <span className="text-sm text-gray-600">
-            {selectedRows.length} row{selectedRows.length !== 1 ? "s" : ""}{" "}
-            selected
-          </span>
-          <span className="text-sm text-gray-600">
-            {pageIndex * pageSize + 1}-{" "}
-            {Math.min((pageIndex + 1) * pageSize, program.length)} of{" "}
-            {program.length}
-          </span>
-          <div className="flex gap-4">
+
+          <div className="flex gap-2">
             <button
-              onClick={previousPage}
+              onClick={() => previousPage()}
               disabled={!canPreviousPage}
-              className={`flex items-center justify-center rounded-full p-1 border ${
+              className={`${
                 canPreviousPage
-                  ? "text-[#ea7b30] border-[#ea7b30]"
-                  : "text-gray-400 border-gray-400 cursor-not-allowed"
-              }`}
+                  ? "bg-[#093A3E] text-white hover:bg-[#ea7b30]"
+                  : "bg-gray-200 text-gray-400"
+              } font-bold py-2 px-3 rounded-lg flex items-center`}
             >
               <FaChevronLeft />
             </button>
             <button
-              onClick={nextPage}
+              onClick={() => nextPage()}
               disabled={!canNextPage}
-              className={`flex items-center justify-center rounded-full p-1 border ${
+              className={`${
                 canNextPage
-                  ? "text-[#ea7b30] border-[#ea7b30]"
-                  : "text-gray-400 border-gray-400 cursor-not-allowed"
-              }`}
+                  ? "bg-[#093A3E] text-white hover:bg-[#ea7b30]"
+                  : "bg-gray-200 text-gray-400"
+              } font-bold py-2 px-3 rounded-lg flex items-center`}
             >
               <FaChevronRight />
             </button>
           </div>
+
+          <select
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+            className="bg-white border border-gray-200 rounded-lg px-2 py-1 text-sm"
+          >
+            {[5, 10, 20].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>

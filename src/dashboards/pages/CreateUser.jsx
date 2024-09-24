@@ -66,13 +66,13 @@ const CreateUser = ({ handleadd }) => {
     <>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-lg relative mx-4 sm:mx-auto">
-          {/* Close Button */}
-          <MdClose
-            onClick={handleadd}
-            className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-xl cursor-pointer"
-          />
-
-          <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+          <div className="flex flex-row items-center justify-between">
+            <div className="text-2xl font-extralight mb-6">Register User</div>
+            <MdClose
+              onClick={handleadd}
+              className=" text-gray-600 hover:text-gray-900 font-bold text-xl cursor-pointer"
+            />
+          </div>
 
           <form className="space-y-4" onSubmit={handleSubmit(onsubmit)}>
             {/* Grid layout for inputs */}
@@ -203,7 +203,7 @@ const CreateUser = ({ handleadd }) => {
 
             <button
               type="submit"
-              className="w-full bg-[#ea7b30] text-white font-bold py-2 px-4 rounded-md hover:bg-[#4f1930] transition duration-300"
+              className="w-full bg-[#ea7b30] text-white  py-2 px-4 rounded-md hover:bg-[#4f1930] transition duration-300"
               disabled={loading} // Disable button while loading
             >
               {loading ? "Loading..." : "Create"}{" "}

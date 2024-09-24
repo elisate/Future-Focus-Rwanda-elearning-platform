@@ -222,7 +222,7 @@ function Student() {
             <span onClick={handleDownload}>Download as PDF</span>
           </div>
         </div>
-        <div>{student.length} Registered Users</div>
+        <div>{student.length} Registered Students</div>
       </div>
 
       <div className="overflow-x-auto">

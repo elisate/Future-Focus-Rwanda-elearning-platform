@@ -10,6 +10,10 @@ import {
 import { mycontext } from "../../fetch/ContextProvider";
 import CreateUser from "./CreateUser";
 import ViewUserModal from "./ViewUserModal"; // Import the modal component
+import { MdAddBox } from "react-icons/md";
+import { IoMdCloudDownload, IoMdPrint } from "react-icons/io";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function Users() {
   const { users = [] } = mycontext();
@@ -39,7 +43,6 @@ function Users() {
           />
         ),
       },
-    
       {
         Header: "Firstname",
         accessor: "firstname",
@@ -77,10 +80,6 @@ function Users() {
               className="text-green-500 cursor-pointer"
               onClick={() => handleEdit(row.original)}
             />
-            {/* <FaTrash
-              className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(row.original)}
-            /> */}
           </div>
         ),
       },
@@ -94,10 +93,6 @@ function Users() {
 
   const handleEdit = (user) => {
     console.log("Edit", user);
-  };
-
-  const handleDelete = (user) => {
-    console.log("Delete", user);
   };
 
   const handleSelect = (id) => {
@@ -141,18 +136,64 @@ function Users() {
     setAdduser(!adduser);
   };
 
+  // Function to handle print
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Function to download as PDF using jsPDF
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+
+    doc.text("User List", 20, 10);
+    doc.autoTable({
+      head: [["Firstname", "Lastname", "Email", "Gender", "User Role"]],
+      body: users.map((user) => [
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.gender,
+        user.role,
+      ]),
+    });
+
+    doc.save("users.pdf");
+  };
+
   return (
     <div className="pt-20 ml-12 lg:ml-48">
       {adduser && <CreateUser handleadd={handleadd} />}
-      <div className="pt-5 pl-3 flex flex-row items-center justify-between pr-2">
-        <button
-          type="button"
-          className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]"
-          onClick={handleadd}
-        >
-          Add Instructor
-        </button>
-        <div>{ users.length} Registered Users</div>
+      <div className="pt-5 pl-3 flex flex-row items-center justify-between pr-2 pb-4">
+        <div className="flex flex-row gap-4">
+          <div
+            className="text-green-500 flex flex-row gap-1 items-center cursor-pointer hover:underline"
+            onClick={handleadd}
+          >
+            <MdAddBox
+              type="button"
+              className="text-sm md:text-base cursor-pointer transition-colors duration-300"
+              onClick={handleadd}
+            />
+            <span> Add Instructor</span>
+          </div>
+          <div
+            className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+            onClick={handlePrint}
+          >
+            <IoMdPrint className="text-sm md:text-base cursor-pointer transition-colors duration-300" />
+            <span>Print Lists</span>
+          </div>
+
+          <div
+            className="flex flex-row items-center gap-1 text-green-500 cursor-pointer hover:underline"
+            onClick={handleDownloadPDF}
+          >
+            <IoMdCloudDownload className="text-sm md:text-base cursor-pointer transition-colors duration-300" />
+            <span>Download as PDF</span>
+          </div>
+        </div>
+
+        <div>{users.length} Registered Users</div>
       </div>
 
       <div className="overflow-x-auto">
@@ -192,6 +233,8 @@ function Users() {
             })}
           </tbody>
         </table>
+
+        {/* Pagination */}
         <div className="flex flex-col items-end pt-4 space-y-2">
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">
@@ -241,7 +284,9 @@ function Users() {
       </div>
 
       {/* Modal for viewing user details */}
-      <ViewUserModal user={viewUser} onClose={() => setViewUser(null)} />
+      {viewUser && (
+        <ViewUserModal user={viewUser} onClose={() => setViewUser(null)} />
+      )}
     </div>
   );
 }
