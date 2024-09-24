@@ -24,6 +24,7 @@ import InstuctorLayout from "./dashboards/instructorDashboard/InstructorLayout";
 import CourseI from "./dashboards/instructorDashboard/CourseI";
 import CreateCourse from "./dashboards/instructorDashboard/CreateCourse";
 import ViewContact from "./dashboards/pages/ViewContact";
+import ResetPassword from "./components/resetPassword";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signIn" element={<SignUp />} />
+          <Route path="/reset-password/:token" element={<ResetPassword/>} />
           <Route path="/" element={<Dashboardlayout />}>
             <Route index element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
