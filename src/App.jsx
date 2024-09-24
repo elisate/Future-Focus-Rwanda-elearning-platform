@@ -1,5 +1,6 @@
 
 import PageSet from "./components/PageSet";
+import { SnackbarProvider } from "notistack";
 import Landing from "./components/Landing";
 import { BrowserRouter , Route, Routes } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
@@ -30,45 +31,49 @@ import RequestForm from "./components/RequestForm";
 
 function App() {
   return (
-    <Appcontext>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<PageSet />}>
-            <Route index element={<Landing />} />
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/program" element={<Programs />} />
-            <Route path="/sprogram/:Pid" element={<Programcourse />} />
-            <Route
-              path="/studentregistration/:Pid"
-              element={<StudentRegistration />}
-            />
-            <Route path="/studentCourse" element={<UserDashboard />} />
-            <Route path="/viewCourse/:courseId" element={<ViewCourse />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signIn" element={<SignUp />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/request" element={<RequestForm/>}/>
-          <Route path="/" element={<Dashboardlayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/programs" element={<Programsd />} />
-            <Route path="/students" element={<Student />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/view-contact/:Pid" element={<ViewContact />} />
-          </Route>
-          <Route path="/" element={<InstuctorLayout />}>
-            <Route path="/dashboardi" index element={<DashboardI />} />
-            <Route path="/instructor" element={<DashboardI />} />
-            <Route path="/addCourses" element={<CourseI />} />
-            <Route path="createCourse" element={<CreateCourse />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </Appcontext>
+    
+      <Appcontext>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<PageSet />}>
+              <Route index element={<Landing />} />
+              <Route path="/landing" element={<Landing />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/program" element={<Programs />} />
+              <Route path="/sprogram/:Pid" element={<Programcourse />} />
+              <Route
+                path="/studentregistration/:Pid"
+                element={<StudentRegistration />}
+              />
+              <Route path="/studentCourse" element={<UserDashboard />} />
+              <Route path="/viewCourse/:courseId" element={<ViewCourse />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signIn" element={<SignUp />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+            <Route path="/request" element={<RequestForm />} />
+
+            <Route path="/" element={<Dashboardlayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/programs" element={<Programsd />} />
+              <Route path="/students" element={<Student />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/view-contact/:Pid" element={<ViewContact />} />
+            </Route>
+            <Route path="/" element={<InstuctorLayout />}>
+              <Route path="/dashboardi" index element={<DashboardI />} />
+              <Route path="/instructor" element={<DashboardI />} />
+              <Route path="/addCourses" element={<CourseI />} />
+              <Route path="createCourse" element={<CreateCourse />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Appcontext>
+ 
   );
 }
 
