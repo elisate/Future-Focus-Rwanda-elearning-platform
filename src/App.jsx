@@ -25,6 +25,7 @@ import CourseI from "./dashboards/instructorDashboard/CourseI";
 import CreateCourse from "./dashboards/instructorDashboard/CreateCourse";
 import ViewContact from "./dashboards/pages/ViewContact";
 import ResetPassword from "./components/resetPassword";
+import RequestForm from "./components/RequestForm";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signIn" element={<SignUp />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/request" element={<Request/>}/>
+          <Route path="/request" element={<RequestForm/>}/>
           <Route path="/" element={<Dashboardlayout />}>
             <Route index element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
