@@ -53,7 +53,7 @@ function AddProgram({ handleProgram }) {
     <div className="fixed inset-0 flex items-center justify-center z-[2000] bg-[rgba(50,49,49,0.5)]">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-xl font-bold">Add New Program</div>
+          <div className="text-xl font-extralight">Add New Program</div>
           <div className="absolute top-4 right-4 text-2xl cursor-pointer hover:text-[#4f1930]">
             <IoClose onClick={handleProgram} />
           </div>
