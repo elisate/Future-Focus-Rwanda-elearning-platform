@@ -7,6 +7,7 @@ function RequestForm() {
   const {
     register,
     handleSubmit,
+    reset, // Add reset method
     formState: { errors },
   } = useForm();
 
@@ -30,6 +31,7 @@ function RequestForm() {
       // Success notification
       if (res.data.success) {
         Notify.success("Password reset link sent to your email.");
+        reset(); // Reset the form fields after successful submission
       } else {
         Notify.failure(res.data.message || "Failed to send email.");
       }
