@@ -18,41 +18,29 @@ function Navbar() {
       <div className="flex items-center justify-between pl-5 pr-5 md:pl-10 md:pr-10 lg:pl-20 lg:pr-20 h-full w-full max-w-screen-xl mx-auto">
         {/* Logo */}
         <div className="w-36 h-16 md:w-36 md:h-20 flex-shrink-0">
-          <img src='lg.png' alt="Logo" className="w-full h-full" />
+          <img src="lg.png" alt="Logo" className="w-full h-full" />
         </div>
 
         {/* Navigation Links (centered) */}
         <div className="hidden md:flex justify-center flex-grow">
           <ul className="flex list-none gap-8 text-gray-900">
             <li>
-              <Link
-                to="/"
-                className="text-gray-900 no-underline "
-              >
+              <Link to="/" className="text-gray-900 no-underline ">
                 HOME
               </Link>
             </li>
             <li>
-              <Link
-                to="/program"
-                className="text-gray-900 no-underline "
-              >
+              <Link to="/program" className="text-gray-900 no-underline ">
                 PROGRAMS
               </Link>
             </li>
             <li>
-              <Link
-                to="/about"
-                className="text-gray-900 no-underline "
-              >
+              <Link to="/about" className="text-gray-900 no-underline ">
                 ABOUT US
               </Link>
             </li>
             <li>
-              <Link
-                to="/landing"
-                className="text-gray-900 no-underline "
-              >
+              <Link to="/landing" className="text-gray-900 no-underline ">
                 TRAINING
               </Link>
             </li>
@@ -61,7 +49,7 @@ function Navbar() {
 
         {/* Status/Logged User Component */}
         <div className="hidden md:flex justify-end flex-shrink-0">
-          <Status_loged/>
+          <Status_loged />
         </div>
 
         {/* Mobile Menu Icon */}
@@ -82,47 +70,35 @@ function Navbar() {
           isMenuOpen ? "block" : "hidden"
         } absolute top-16 left-0 w-full bg-white`}
       >
-        <ul className="flex flex-col list-none gap-5 text-gray-900 p-4 " onClick={toggleMenu}>
+        <ul
+          className="flex flex-col list-none gap-5 text-gray-900 p-4 "
+          onClick={toggleMenu}
+        >
           <li>
-            <Link
-              to="/"
-              className="text-gray-900 no-underline "
-              
-            >
+            <Link to="/" className="text-gray-900 no-underline ">
               HOME
             </Link>
           </li>
           <li>
-            <Link
-              to="/program"
-              className="text-gray-900 no-underline "
-            >
+            <Link to="/program" className="text-gray-900 no-underline ">
               PROGRAMS
             </Link>
           </li>
           <li>
-            <Link
-              to="/about"
-              className="text-gray-900 no-underline "
-            >
+            <Link to="/about" className="text-gray-900 no-underline ">
               ABOUT US
             </Link>
           </li>
           <li>
-            <Link
-              to="/landing"
-              className="text-gray-900 no-underline "
-            >
+            <Link to="/landing" className="text-gray-900 no-underline ">
               TRAINING
             </Link>
           </li>
-          
         </ul>
         <div className="pl-3 pb-3">
-            <Status_loged/>
-          </div>
+          <Status_loged />
+        </div>
       </div>
-
     </div>
   );
 }

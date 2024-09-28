@@ -15,7 +15,8 @@ const Status_loged = () => {
 
   if (role === undefined) {
     return (
-      <div className="flex md:hidden lg:flex items-center">
+      <div className="flex sm:hidden md:flex items-center">
+        {/* Show login button */}
         <Link to="/login" title="Login">
           <button className="bg-[#ea7b30] text-white rounded-lg border border-transparent py-2 px-4 text-sm md:text-base cursor-pointer transition-colors duration-300 hover:bg-[#4f1930]">
             Login
@@ -25,7 +26,7 @@ const Status_loged = () => {
     );
   } else {
     return (
-      <div className="flex md:hidden lg:flex items-center">
+      <div className="flex sm:hidden md:flex items-center">
         {profile && <Profile handleprofile={handleprofile} />}
         <div className="flex items-center gap-2 md:gap-3">
           <img
